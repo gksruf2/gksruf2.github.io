@@ -14,7 +14,7 @@ menu:
       - name: 
         link: 
   - name: Posts
-    link: /
+    link: /_posts
   - name: Tags
     link: /tags
   - name: About
