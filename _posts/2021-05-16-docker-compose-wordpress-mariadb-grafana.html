@@ -5,16 +5,16 @@ date:   2021-05-16 01:39:00 +0200
 published: 2021-05-16 02:30:00 +0200
 comments: true
 categories: automation
-tags: [docker],[docker-compose],[wordpress],[mariadb],[grafana]
+tags: [docker][docker-compose][wordpress][mariadb][grafana]
 github: "https://github.com/gksruf2/gksruf"
 ---
 
-# docker-compose
+<h1> docker-compose</h1>
 <p>서로 통신하는 docker container를 만들기 위해 docker-compose.yml 파일에 
   프론트엔드로 사용할wordpress와 database로 사용할 mariadb(Mysql),
   그리고 database를 시각화하는 grafana를 담기로 구상하였습니다.</p>
 
-## 독립적인 container 구축해보기_1. wordpress
+  <h2> 독립적인 container 구축해보기_1. wordpress</h2>
 <p>
   docker pull wordpress
   docker run -d -p 8000:80 wordpress
@@ -26,7 +26,7 @@ github: "https://github.com/gksruf2/gksruf"
   localhost:8000에 접속하여 wordpress의 설정을 할 수 있습니다.
 </p>
 
-## 독립적인 container 구축해보기_2. mariadb
+  <h2> 독립적인 container 구축해보기_2. mariadb</h2>
 <p>
   #docker pull mariadb
   #docker run -d -p 3306:3306: -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=root mariadb
@@ -52,7 +52,7 @@ github: "https://github.com/gksruf2/gksruf"
   select * from table의이름
   table의 data를 확인할 수 있습니다.
 </p>
-## 독립적인 container 구축해보기_3. grafana
+<h2> 독립적인 container 구축해보기_3. grafana</h2>
 <p>
   docker pull grafana/grafana:latest-ubuntu
   docker run -d -p 3000:3000 grafana/grafana:latest-ubuntu
