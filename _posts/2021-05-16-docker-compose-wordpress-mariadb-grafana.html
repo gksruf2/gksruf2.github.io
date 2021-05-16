@@ -10,31 +10,31 @@ github: "https://github.com/gksruf2/gksruf"
 ---
 
 <h1> docker-compose</h1>
-<p>서로 통신하는 docker container를 만들기 위해 docker-compose.yml 파일에 
-  프론트엔드로 사용할wordpress와 database로 사용할 mariadb(Mysql),
-  그리고 database를 시각화하는 grafana를 담기로 구상하였습니다.</p>
-
+<p>
+<ul>
+　　<li>서로 통신하는 docker container를 만들기 위해 docker-compose.yml 파일에</li>
+　　<li>프론트엔드로 사용할wordpress와 database로 사용할 mariadb(Mysql), 그리고 database를 시각화하는 grafana를 담기로 구상하였습니다.</li>
+</ul>
+</p>
+<p>
   <h2> 독립적인 container 구축해보기_1. wordpress</h2>
-<p>
-  docker pull wordpress
-  docker run -d -p 8000:80 wordpress
-</p>
-<p>
-  -d : docker daemon으로 background에서 wordpress를 동작시킵니다.
-  -p 8080:80 : wordpress는 80의 내부 port를 사용합니다. 외부에서 접속하기 위해서 8000 번 port를 뚫어 줍니다.
-  웹브라우저에서 localhost:8000으로 접속할 수 있습니다.
-  localhost:8000에 접속하여 wordpress의 설정을 할 수 있습니다.
-</p>
+<ul>
+　　<li>docker pull wordpress</li>
+　　<li>docker run -d -p 8000:80 wordpress</li>
+</ul>
+<ul>
+　　<li>-d : docker daemon으로 background에서 wordpress를 동작시킵니다.</li>
+　　<li>-p 8080:80 : wordpress는 80의 내부 port를 사용합니다. 외부에서 접속하기 위해서 8000 번 port를 뚫어 줍니다.</li>
+  <li>웹브라우저에서 localhost:8000으로 접속할 수 있습니다.</li>
+  <li>localhost:8000에 접속하여 wordpress의 설정을 할 수 있습니다.</li>
 
   <h2> 독립적인 container 구축해보기_2. mariadb</h2>
 <p>
-  #docker pull mariadb
-  #docker run -d -p 3306:3306: -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=root mariadb
+  docker pull mariadb
+  docker run -d -p 3306:3306 -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=root mariadb
 </p>
 <p>
-  firewall-cmd --permanent --zone=public --add-port=3306/tcp
-  firewall-cmd --reload
-  무지성으로 위의 명령어를 사용했는데, 없어도 작동하는지 테스트 필요하다.
+  
   테스트중...
   docker exec -it mariadb의id /bin/bash
   mysql -u root -p
@@ -42,15 +42,17 @@ github: "https://github.com/gksruf2/gksruf"
   mysql에 접속하여 db를 구경해보겠습니다.
   password는 MYSQL_ROOT_PASSWORD=root 에서 설정한대로, root입니다.
   show databases;
-  
-  아무것도 없는 db에서 databases가 무엇이 있는지 확인 필요하다.
-  
-  use wordpress;
+  여러 databases 중에서 mysql을 구경해보겠습니다.
+  use mysql;
   데이터베이스의 목록을 보여줍니다. 저는 데이터베이스들 중, wordpress에 접속할 것입니다.
   show tables;
   데이터베이스가 가진 table이 무엇이 있는지 보겠습니다. 맘에 드는 table을 선택하여 들여다볼 것입니다.
-  select * from table의이름
+  select * from table의이름;
   table의 data를 확인할 수 있습니다.
+  
+  firewall-cmd --permanent --zone=public --add-port=3306/tcp
+  firewall-cmd --reload
+  무지성으로 위의 명령어를 사용했는데, 없어도 작동하는지 테스트 필요하다.
 </p>
 <h2> 독립적인 container 구축해보기_3. grafana</h2>
 <p>
